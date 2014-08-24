@@ -27,3 +27,15 @@
 
 <%= link_to 'Edit', edit_anime_path(@anime) %> |
 <%= link_to 'Back', animes_path %>
+
+<ul>
+<% @torrents.each do |torrent| %>
+  <li>
+    <h4><%= torrent.title %></h4>
+    <span>
+      <%= torrent.description %>
+    </span>
+    <%= link_to '[download]', torrent.link %>
+  </li>
+<% end %>
+</ul>
