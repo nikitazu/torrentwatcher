@@ -2,6 +2,9 @@ require 'net/http'
 require 'rss'
 
 class Anime < ActiveRecord::Base
+  default_scope -> { where is_deleted: false }
+  after_initialize :set_defaults
+  
   def query_term
     title = self.title.gsub ' ', '+'
     if self.progress > 0
@@ -27,6 +30,13 @@ class Anime < ActiveRecord::Base
     end
     return torrents
   end
+  
+  protected
+    def set_defaults
+      if self.is_deleted.nil?
+        self.is_deleted = false
+      end
+    end
 end
 
 class Torrent
@@ -35,6 +45,6 @@ class Torrent
   def initialize(item)
     self.title = item.title
     self.link = item.link
-    self.description = item.description
+    self.description = item.description 
   end
 end

@@ -26,7 +26,6 @@ class AnimesController < ApplicationController
   # POST /animes.json
   def create
     @anime = Anime.new(anime_params)
-
     respond_to do |format|
       if @anime.save
         format.html { redirect_to @anime, notice: 'Anime was successfully created.' }
@@ -55,7 +54,7 @@ class AnimesController < ApplicationController
   # DELETE /animes/1
   # DELETE /animes/1.json
   def destroy
-    @anime.destroy
+    @anime.update is_deleted: true
     respond_to do |format|
       format.html { redirect_to animes_url, notice: 'Anime was successfully destroyed.' }
       format.json { head :no_content }

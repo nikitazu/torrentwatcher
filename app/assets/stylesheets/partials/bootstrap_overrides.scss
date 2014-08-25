@@ -1,0 +1,64 @@
+@import "partials/colors";
+
+ul.list-group {
+ list-style: none;
+}
+
+a.list-group-item.active,
+a.list-group-item.active:hover,
+a.list-group-item.active:focus {
+  background-color: $activeColor;
+  border-color: $activeColor;
+}
+
+a,
+a:link,
+a:visited,
+a:hover,
+a:focus {
+  color: $activeColor;
+  background-color: transparent;
+  
+  .list-group-item-heading { color: $activeColor; }
+  .list-group-item-text { color: $textColor; }
+}
+
+.navbar-default {
+  background-color: #333;
+  border: none;
+  color: $navbarColor;
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus,
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: $navbarColor;
+}
+
+.input-group {
+  margin-bottom: 5px;
+}
+.input-group-addon {
+  min-width: 220px;
+}
+
+// my bootstrap-like classes
+
+.list-group-item-buttons {
+  position:absolute;
+  right:10px;
+  top:10%;
+}
+
+.btn-toolbar-horizontal {
+  form {
+    display: inline-block;
+  }
+}
+
+.form-control-from-label {
+  font-weight: normal;
+  color: gray;
+  cursor: pointer;
+}
