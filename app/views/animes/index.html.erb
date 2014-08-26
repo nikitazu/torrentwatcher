@@ -8,7 +8,14 @@
 <% @animes.each do |anime| %>
 <li class="list-group-item">
   <h4>
-    <%= anime.title %><small> - <%= anime.status %></small>
+    <%= link_to anime.title, "javascript:void();", onclick: "animesModule.expand(this);" %>
+    <small> - <%= anime.status %></small>
+  
+    <div style="float:right">
+      <%= link_to 'Show', anime %> |
+      <%= link_to 'Edit', edit_anime_path(anime) %> |
+      <%= link_to 'Archive', anime, method: :delete %>
+    </div>
   </h4>
   
   <span class="badge">
@@ -19,11 +26,9 @@
     <%= score_tag anime.score %>
   </div>
   
-  <div>
-    <%= link_to 'Show', anime %> |
-    <%= link_to 'Edit', edit_anime_path(anime) %> |
-    <%= link_to 'Archive', anime, method: :delete %>
-  </div>
+</li>
+<li class="list-group-item" style="display:none" data-url="<%= anime_path anime %>">
+  empty?
 </li>
 <% end %>
 </ul>
@@ -31,3 +36,9 @@
 <div>
   <%= link_to 'New Anime', new_anime_path %>
 </div>
+
+<script type="text/javascript">
+$(function() {
+  animesModule = new AnimesModule();
+});
+</script>
