@@ -7,8 +7,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+  
+  <h1><%= yield :page_header %></h1>
+  <%= render 'shared/alerts' %>
+  <%= yield %>
+  
 </body>
 </html>

@@ -1,5 +1,5 @@
 class AnimesController < ApplicationController
-  before_action :set_anime, only: [:show, :edit, :update, :destroy]
+  before_action :set_anime, only: [:show, :edit, :update, :destroy, :up]
 
   # GET /animes
   # GET /animes.json
@@ -42,7 +42,7 @@ class AnimesController < ApplicationController
   def update
     respond_to do |format|
       if @anime.update(anime_params)
-        format.html { redirect_to @anime, notice: 'Anime was successfully updated.' }
+        format.html { redirect_to animes_url, notice: 'Anime was successfully updated.' }
         format.json { render :show, status: :ok, location: @anime }
       else
         format.html { render :edit }
@@ -58,6 +58,15 @@ class AnimesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to animes_url, notice: 'Anime was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+  
+  # POST /animes/1/up
+  def up
+    @anime.update progress: @anime.progress+1
+    respond_to do |format|
+      format.html { redirect_to animes_url, notice: 'Anime progress was successfully upped.' }
+      format.json { render json: @anime.progress, status: :ok }
     end
   end
 

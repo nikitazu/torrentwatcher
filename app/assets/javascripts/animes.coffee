@@ -1,11 +1,4 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
-
 class window.AnimesModule
-  constructor: ->
-    console.log "foo"
-  
   expand: (animeLink) ->
     $torrents = $(animeLink).parent().parent().next()
     $torrents.empty()
@@ -19,7 +12,7 @@ class window.AnimesModule
     false
   
   putProgressBarIn: ($torrents) ->
-    $torrents.append $("
+    $torrents.append $ "
     <div class='progress'>
       <div class='progress-bar progress-bar-striped active'
            role='progressbar'
@@ -29,4 +22,4 @@ class window.AnimesModule
            style='width:100%'>
         Loading...
       </div>
-    </div>")
+    </div>"

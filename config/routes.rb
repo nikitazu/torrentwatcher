@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :animes
+  resources :animes do
+    member do
+      post 'up'
+    end
+  end
+  
   root 'animes#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
