@@ -12,7 +12,9 @@
     <small> - <%= anime.status %></small>
   
     <div style="float:right">
-      <%= link_to 'Show', anime %> |
+      <small>
+        <%= anime.updated_at.strftime "%Y-%m-%d" %>
+      </small>
       <%= link_to 'Edit', edit_anime_path(anime) %> |
       <%= link_to 'Archive', anime, method: :delete %>
     </div>
