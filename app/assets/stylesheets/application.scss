@@ -19,3 +19,17 @@
 @import "partials/reset";
 @import "partials/colors";
 @import "partials/bootstrap_overrides";
+
+body {
+  background-image: url(image_path('bg.jpg'));
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#content .list-group-item {
+  opacity: 0.9;
+}
+
+#content .list-group-item:hover {
+  opacity: 1;
+}

@@ -10,7 +10,10 @@
   
   <h1><%= yield :page_header %></h1>
   <%= render 'shared/alerts' %>
-  <%= yield %>
+  
+  <div id="content">
+    <%= yield %>
+  </div>
   
 </body>
 </html>
