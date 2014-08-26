@@ -3,6 +3,7 @@ require 'rss'
 
 class Anime < ActiveRecord::Base
   default_scope -> { where is_deleted: false }
+  default_scope -> { order :updated_at => :desc }
   after_initialize :set_defaults
   
   def query_term
@@ -33,9 +34,9 @@ class Anime < ActiveRecord::Base
   
   protected
     def set_defaults
-      if self.is_deleted.nil?
-        self.is_deleted = false
-      end
+      self.is_deleted = false if self.is_deleted.nil?
+      self.score = 0 if self.score.nil?
+      self.progress = 0 if self.progress.nil?
     end
 end
 
