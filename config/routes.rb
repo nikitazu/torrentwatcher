@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :animes do
     member do
       post 'up'
+      post 'restore'
     end
   end
   

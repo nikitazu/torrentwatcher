@@ -1,10 +1,14 @@
 class AnimesController < ApplicationController
-  before_action :set_anime, only: [:show, :edit, :update, :destroy, :up]
+  before_action :set_anime, only: [:show, :edit, :update, :destroy, :restore, :up]
 
   # GET /animes
   # GET /animes.json
   def index
-    @animes = Anime.all
+    if params[:deleted]
+      @animes = Anime.deleted
+    else
+      @animes = Anime.current
+    end
   end
 
   # GET /animes/1
@@ -57,6 +61,15 @@ class AnimesController < ApplicationController
     @anime.update is_deleted: true
     respond_to do |format|
       format.html { redirect_to animes_url, notice: 'Anime was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+  
+  # POST /animes/1/restore
+  def restore
+    @anime.update is_deleted: false
+    respond_to do |format|
+      format.html { redirect_to animes_url, notice: 'Anime was successfully restored.' }
       format.json { head :no_content }
     end
   end

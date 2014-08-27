@@ -21,7 +21,11 @@
   <div class="btn-toolbar-horizontal btn-group">
     <%= small_button_to 'Up', up_anime_path(anime) %>
     <%= small_button_to 'Edit', edit_anime_path(anime), method: "get" %>
-    <%= small_button_to 'Archive', anime, method: "delete" %>
+    <% unless anime.is_deleted %>
+      <%= small_button_to 'Archive', anime, method: "delete" %>
+    <% else %>
+      <%= small_button_to 'Restore', restore_anime_path(anime) %>
+    <% end %>
   </div>
   
   <div style="float:right">

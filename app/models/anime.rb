@@ -2,9 +2,14 @@ require 'net/http'
 require 'rss'
 
 class Anime < ActiveRecord::Base
-  default_scope -> { where is_deleted: false }
+  validates :episodes, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
+  validates :progress, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
+  
   default_scope -> { order :updated_at => :desc }
   after_initialize :set_defaults
+  
+  scope :current, -> { where is_deleted: false }
+  scope :deleted, -> { where is_deleted: true }
   
   def query_term
     title = self.title.gsub ' ', '+'
@@ -35,7 +40,7 @@ class Anime < ActiveRecord::Base
   protected
     def set_defaults
       self.is_deleted = false if self.is_deleted.nil?
-      self.score = 0 if self.score.nil?
+      self.score = 0 if self.score.nil? or self.score > 10 or self.score < 0
       self.progress = 0 if self.progress.nil?
     end
 end
