@@ -23,7 +23,7 @@ class Anime < ActiveRecord::Base
   end
   
   def lookup_torrents
-    url = "http://www.nyaa.se/?page=rss&term=#{self.query_term}"
+    url = "http://www.nyaa.se/?page=rss&cats=1_37&term=#{self.query_term}"
     logger.debug "looking up torrents at #{url}"
     torrents = []
     open(url) do |rss|
@@ -34,7 +34,7 @@ class Anime < ActiveRecord::Base
         torrents << Torrent.new(item)
       end
     end
-    return torrents
+    return torrents.sort
   end
   
   protected
@@ -45,12 +45,4 @@ class Anime < ActiveRecord::Base
     end
 end
 
-class Torrent
-  attr_accessor :title, :link, :description
-  
-  def initialize(item)
-    self.title = item.title
-    self.link = item.link
-    self.description = item.description 
-  end
-end
+

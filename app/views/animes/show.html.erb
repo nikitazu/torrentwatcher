@@ -31,7 +31,14 @@
 <ul>
 <% @torrents.each do |torrent| %>
   <li>
-    <h4><%= torrent.title %></h4>
+    <h4>
+      <small class="<%= torrent.group_type %>">
+        <%= torrent.group %>
+      </small>
+      <span>
+        <%= torrent.name %>
+      </span>
+    </h4>
     <span>
       <%= torrent.description %>
     </span>
