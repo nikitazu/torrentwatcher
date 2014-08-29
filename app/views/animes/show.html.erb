@@ -39,6 +39,21 @@
         <%= torrent.name %>
       </span>
     </h4>
+    <div>
+      <span>seeders: <%= torrent.seeders %></span>
+      <span>leechers: <%= torrent.leechers %></span>
+      <span>downloads: <%= torrent.downloads %></span>
+      <span>size: <%= torrent.size %> <%= torrent.size_units %></span>
+      <% if torrent.is_trusted %>
+      <span>Trusted</span>
+      <% end %>
+      <% if torrent.is_remake %>
+      <span>Remake</span>
+      <% end %>
+      <% if torrent.is_a_plus %>
+      <span>A+</span>
+      <% end %>
+    </div>
     <span>
       <%= torrent.description %>
     </span>
