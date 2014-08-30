@@ -11,27 +11,27 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+  <div class="field input-group">
+    <%= f.label :title, class: "input-group-addon" %>
+    <%= f.text_field :title, class: "form-control" %>
   </div>
-  <div class="field">
-    <%= f.label :status %><br>
-    <%= f.text_field :status %>
+  <div class="field input-group">
+    <%= f.label :status, class: "input-group-addon" %>
+    <%= f.text_field :status, class: "form-control" %>
   </div>
-  <div class="field">
-    <%= f.label :score %><br>
-    <%= f.number_field :score %>
+  <div class="field input-group">
+    <%= f.label :score, class: "input-group-addon" %>
+    <%= f.number_field :score, class: "form-control", min: 0, max: 10 %>
   </div>
-  <div class="field">
-    <%= f.label :episodes %><br>
-    <%= f.number_field :episodes %>
+  <div class="field input-group">
+    <%= f.label :episodes, class: "input-group-addon" %>
+    <%= f.number_field :episodes, class: "form-control", min: 0 %>
   </div>
-  <div class="field">
-    <%= f.label :progress %><br>
-    <%= f.number_field :progress %>
+  <div class="field input-group">
+    <%= f.label :progress, class: "input-group-addon" %>
+    <%= f.number_field :progress, class: "form-control", min: 0 %>
   </div>
-  <div class="actions">
+  <div class="actions input-group">
     <%= f.submit %>
   </div>
 <% end %>

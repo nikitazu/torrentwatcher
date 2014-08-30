@@ -24,10 +24,6 @@ class Torrent
     parse_episode!
   end
   
-  def <=>(other)
-    self.weight <=> other.weight
-  end
-  
   private
     def pre_clean_name!
       self.name.gsub! /\d+x1080/, '1080p'
@@ -47,10 +43,10 @@ class Torrent
     def parse_group!
       if /(HorribleSubs)|(Commie)/.match(self.group)
         self.group_type = "torrent-group-good"
-        self.weight = -100
+        self.weight = 100
       elsif /HZCHO/.match(self.group)
         self.group_type = "torrent-group-sad"
-        self.weight = 100
+        self.weight = -100
       else
         self.group_type = "torrent-group-normal"
         self.weight = 0

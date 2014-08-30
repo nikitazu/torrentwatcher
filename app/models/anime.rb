@@ -34,7 +34,9 @@ class Anime < ActiveRecord::Base
         torrents << Torrent.new(item)
       end
     end
-    return torrents.sort
+    torrents.sort_by! { |x| [x.seeders, x.downloads, x.weight] }
+    torrents.reverse!
+    return torrents
   end
   
   protected
