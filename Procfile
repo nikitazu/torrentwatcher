@@ -1,2 +1,1 @@
-web: bundle exec bin/rails s
-
+web: bundle exec bin/rails s thin start -p $PORT

@@ -33,6 +33,9 @@ gem 'rails_12factor', group: :production
 # Auth
 gem 'devise', '3.2.4'
 
+# Web server
+gem 'thin'
+
 group :development, :test do
   gem 'foreman'
 end
