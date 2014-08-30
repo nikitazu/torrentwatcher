@@ -34,3 +34,11 @@ body {
 #content .list-group-item:hover {
   opacity: 1;
 }
+
+#authentication_form {
+  float: right;
+  background-color: white;
+  opacity: 0.9;
+  padding: 10px;
+  border-radius: 5px;
+}

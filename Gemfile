@@ -30,6 +30,13 @@ gem 'spring',        group: :development
 
 gem 'rails_12factor', group: :production
 
+# Auth
+gem 'devise', '3.2.4'
+
+group :development, :test do
+  gem 'foreman'
+end
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

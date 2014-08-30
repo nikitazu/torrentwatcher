@@ -1,5 +1,6 @@
 class AnimesController < ApplicationController
   before_action :set_anime, only: [:show, :edit, :update, :destroy, :restore, :up]
+  before_filter :authenticate_user!
 
   # GET /animes
   # GET /animes.json
