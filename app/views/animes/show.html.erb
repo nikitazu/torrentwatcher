@@ -1,63 +1,45 @@
-<p id="notice"><%= notice %></p>
+<% if @torrents.length > 0 %>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Link</th>
+      <th>Seed</th>
+      <th>Leech</th>
+      <th>Down</th>
+      <th>Size</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @torrents.each do |torrent| %>
+    <tr>
+      <td>
+        <p><%= torrent.name %></p>
+        <p>
+          <span class="<%= torrent.group_type %>">
+            <%= torrent.group %>
+          </span>
+          <% if torrent.is_trusted %>
+          <span>Trusted</span>
+          <% end %>
+          <% if torrent.is_remake %>
+          <span>Remake</span>
+          <% end %>
+          <% if torrent.is_a_plus %>
+          <span>A+</span>
+          <% end %>
+        </p>
+      </td>
 
-<p>
-  <strong>Title:</strong>
-  <%= @anime.title %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @anime.status %>
-</p>
-
-<p>
-  <strong>Score:</strong>
-  <%= @anime.score %>
-</p>
-
-<p>
-  <strong>Episodes:</strong>
-  <%= @anime.episodes %>
-</p>
-
-<p>
-  <strong>Progress:</strong>
-  <%= @anime.progress %>
-</p>
-
-<%= link_to 'Edit', edit_anime_path(@anime) %> |
-<%= link_to 'Back', animes_path %>
-
-<ul>
-<% @torrents.each do |torrent| %>
-  <li>
-    <h4>
-      <small class="<%= torrent.group_type %>">
-        <%= torrent.group %>
-      </small>
-      <span>
-        <%= torrent.name %>
-      </span>
-    </h4>
-    <div>
-      <span>seeders: <%= torrent.seeders %></span>
-      <span>leechers: <%= torrent.leechers %></span>
-      <span>downloads: <%= torrent.downloads %></span>
-      <span>size: <%= torrent.size %> <%= torrent.size_units %></span>
-      <% if torrent.is_trusted %>
-      <span>Trusted</span>
-      <% end %>
-      <% if torrent.is_remake %>
-      <span>Remake</span>
-      <% end %>
-      <% if torrent.is_a_plus %>
-      <span>A+</span>
-      <% end %>
-    </div>
-    <span>
-      <%= torrent.description %>
-    </span>
-    <%= link_to '[download]', torrent.link %>
-  </li>
+      <td><%= link_to '[download]', torrent.link %></td>
+      <td class="torrent-seeders"><%= torrent.seeders %></td>
+      <td class="torrent-leechers"><%= torrent.leechers %></td>
+      <td><%= torrent.downloads %></td>
+      <td><%= torrent.size %> <%= torrent.size_units %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<% else %>
+<p>No torrents found.</p>
 <% end %>
-</ul>

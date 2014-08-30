@@ -3,13 +3,21 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .torrent-group-good {
-  color: blue;
+  color: lightgreen;
 }
 
 .torrent-group-normal {
-  color: green;
+  color: lightblue;
 }
 
 .torrent-group-sad {
   color: silver;
+}
+
+.torrent-seeders {
+  color: green;
+}
+
+.torrent-leechers {
+  color: red;
 }
