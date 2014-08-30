@@ -3,6 +3,7 @@
   <thead>
     <tr>
       <th>Title</th>
+      <th>Episode</th>
       <th>Link</th>
       <th>Seed</th>
       <th>Leech</th>
@@ -28,8 +29,12 @@
           <% if torrent.is_a_plus %>
           <span>A+</span>
           <% end %>
+          <span class="torrent-resolution">
+            <%= torrent.resolution %>
+          </span>
         </p>
       </td>
+      <td><%= torrent.episode %></td>
 
       <td><%= link_to '[download]', torrent.link %></td>
       <td class="torrent-seeders"><%= torrent.seeders %></td>
