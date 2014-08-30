@@ -2,6 +2,8 @@ require 'net/http'
 require 'rss'
 
 class Anime < ActiveRecord::Base
+  belongs_to :user
+  
   validates :episodes, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
   validates :progress, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
   

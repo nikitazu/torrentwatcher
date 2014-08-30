@@ -6,9 +6,9 @@ class AnimesController < ApplicationController
   # GET /animes.json
   def index
     if params[:deleted]
-      @animes = Anime.deleted
+      @animes = current_user.animes.deleted
     else
-      @animes = Anime.current
+      @animes = current_user.animes.current
     end
   end
 
@@ -21,6 +21,7 @@ class AnimesController < ApplicationController
   # GET /animes/new
   def new
     @anime = Anime.new
+    @anime.user = current_user
   end
 
   # GET /animes/1/edit
@@ -31,6 +32,7 @@ class AnimesController < ApplicationController
   # POST /animes.json
   def create
     @anime = Anime.new(anime_params)
+    @anime.user = current_user
     respond_to do |format|
       if @anime.save
         format.html { redirect_to animes_url, notice: 'Anime was successfully created.' }
@@ -46,6 +48,7 @@ class AnimesController < ApplicationController
   # PATCH/PUT /animes/1.json
   def update
     respond_to do |format|
+      @anime.user = current_user
       if @anime.update(anime_params)
         format.html { redirect_to animes_url, notice: 'Anime was successfully updated.' }
         format.json { render :show, status: :ok, location: @anime }
