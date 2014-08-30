@@ -16,6 +16,7 @@ class AnimesController < ApplicationController
   # GET /animes/1.json
   def show
     @torrents = @anime.lookup_torrents
+    render layout: false
   end
 
   # GET /animes/new
