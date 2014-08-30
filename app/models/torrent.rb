@@ -29,15 +29,23 @@ class Torrent
       self.name.gsub! /\d+x1080/, '1080p'
       self.name.gsub! /\d+x720/, '720p'
       self.name.gsub! /\d+x480/, '480p'
+      self.name.gsub! /\(/, '['
+      self.name.gsub! /\)/, ']'
     end
     
     def post_clean_name!
-      self.name.gsub! /(\[|\(|\s)(AAC|10-?bit|H264)(\]|\)|\s)/, ''
+      self.name.gsub! /[\s|\[]AAC/, ''
+      self.name.gsub! /[\s|\[]10-?bit/, ''
+      self.name.gsub! /[\s|\[][H|h]\.?264/, ''
+      self.name.gsub! /[\s|\[]ONA/, ''
       self.name.gsub! /\.(mkv|avi|mp4)/, ''
       self.name.gsub! /_/, ' '
       self.name.gsub! /\[\]/, ''
-      self.name.gsub! /\(\)/, ''
       self.name.gsub! /\[\w+\]/, ''
+      self.name.gsub! /\]/, ''
+      self.name.gsub! /-/, ' '
+      self.name.gsub! '  ', ' '
+      self.name.strip!
     end
     
     def parse_group!
@@ -82,7 +90,7 @@ class Torrent
     end
     
     def parse_episode!
-      title_match = /[\s|\(|\[|-](\d{1,3})[$|\)|\]|\s|v]/.match(self.name)
+      title_match = /[\s|\(|\[|-](\d{1,3})(v\d)?$/.match(self.name)
       if title_match
         self.episode = title_match[1].to_i
       end
