@@ -19,7 +19,10 @@
   </div>
   
   <h1><%= yield :page_header %></h1>
-  <%= render 'shared/alerts' %>
+  
+  <div id="alerts_container">
+    <%= render 'shared/alerts' %>
+  </div>
   
   <div id="content">
     <%= yield %>

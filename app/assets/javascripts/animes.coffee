@@ -1,9 +1,17 @@
 class window.AnimesModule
   constructor: ->
+    @$alerts = $("#alerts_container")
     $ratings = $(".js-animes-rating")
     $ratings.rating()
-    $ratings.on "rating.change", (event) ->
-      setTimeout (-> $(event.target).closest("form").submit()), 500
+    $ratings.on "rating.change", (event, value) =>
+      $form = $(event.target).closest("form")
+      $.ajax
+        url: $form.attr("action")
+        method: "POST"
+        data: $form.serialize()
+        dataType: "JSON"
+        success: (json) => @putNotice "Anime [#{json.title}] was rated with #{value} star(s) successfully."
+        error: (json) => @putError json
     
   expand: (animeLink) ->
     $torrents = $(animeLink).parent().parent().next()
@@ -29,3 +37,22 @@ class window.AnimesModule
         Loading...
       </div>
     </div>"
+
+  putNotice: (message) ->
+    @putMessage message, "notice alert"
+  
+  putError: (json) ->
+    errorMessage = ""
+    for name,text of $.parseJSON(json.responseText)
+      errorMessage += "<strong>#{name}:</strong> #{text}.<br/>"
+    @putMessage errorMessage, "alert alert-danger"
+
+  putMessage: (message, classes) ->
+    @$alerts.empty().append $ "
+    <p class='#{classes} alert-info alert-dismissible' role='alert'>
+     <button type='button' class='close' data-dismiss='alert'>
+       <span aria-hidden='true'>&times;</span>
+       <span class='sr-only'><%= t 'actions.dismiss' %></span>
+     </button>
+     #{message}
+    </p>"

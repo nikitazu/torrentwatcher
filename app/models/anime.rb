@@ -6,6 +6,7 @@ class Anime < ActiveRecord::Base
   
   validates :episodes, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
   validates :progress, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
+  validates :score, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
   
   default_scope -> { order :updated_at => :desc }
   after_initialize :set_defaults
