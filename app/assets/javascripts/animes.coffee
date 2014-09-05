@@ -1,4 +1,10 @@
 class window.AnimesModule
+  constructor: ->
+    $ratings = $(".js-animes-rating")
+    $ratings.rating()
+    $ratings.on "rating.change", (event) ->
+      setTimeout (-> $(event.target).closest("form").submit()), 500
+    
   expand: (animeLink) ->
     $torrents = $(animeLink).parent().parent().next()
     $torrents.empty()

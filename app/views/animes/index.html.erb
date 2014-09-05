@@ -10,12 +10,6 @@
   <h4>
     <%= link_to anime.title, "javascript:void();", onclick: "animesModule.expand(this);" %>
     <small> - <%= anime.status %></small>
-  
-    <div style="float:right">
-      <small>
-        <%= score_tag anime.score %>
-      </small>
-    </div>
   </h4>
   
   <div class="btn-toolbar-horizontal btn-group">
@@ -26,6 +20,11 @@
     <% else %>
       <%= small_button_to 'Restore', restore_anime_path(anime) %>
     <% end %>
+    <div style="display:inline-block">
+      <%= form_for anime do |f| %>
+        <%= star_tag f %>
+      <% end %>
+    </div>
   </div>
   
   <div style="float:right">
