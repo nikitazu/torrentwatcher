@@ -28,13 +28,10 @@ class Anime < ActiveRecord::Base
     url = "http://www.nyaa.se/?page=rss&cats=1_37&term=#{self.query_term}"
     logger.debug "looking up torrents at #{url}"
     torrents = []
-    open(url) do |rss|
-      feed = RSS::Parser.parse(rss)
-      logger.debug "Title: #{feed.channel.title}"
-      feed.items.each do |item|
-        logger.debug "Item: #{item.title}"
-        torrents << Torrent.new(item)
-      end
+    begin
+      try_parse_rss url, torrents
+    rescue Exception => ex
+      return :error
     end
     torrents.sort_by! { |x| [x.seeders, x.downloads, x.weight] }
     torrents.reverse!
@@ -46,6 +43,17 @@ class Anime < ActiveRecord::Base
       self.is_deleted = false if self.is_deleted.nil?
       self.score = 0 if self.score.nil? or self.score > 10 or self.score < 0
       self.progress = 0 if self.progress.nil?
+    end
+  
+  private
+    def try_parse_rss(url, torrents)
+      open(url) do |rss|
+        logger.debug "rss #{url} is opened"
+        feed = RSS::Parser.parse(rss)
+        feed.items.each do |item|
+          torrents << Torrent.new(item)
+        end
+      end
     end
 end
 

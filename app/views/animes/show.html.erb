@@ -1,4 +1,6 @@
-<% if @torrents.length > 0 %>
+<% if @torrents == :error %>
+<p>Error</p>
+<% elsif @torrents.length > 0 %>
 <table class="table table-hover">
   <thead>
     <tr>
