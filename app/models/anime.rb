@@ -3,7 +3,7 @@ require 'rss'
 
 class Anime < ActiveRecord::Base
   belongs_to :user
-  has_and_belongs_to_many :tags
+  has_and_belongs_to_many :tags, join_table: "tags_animes"
   
   validates :episodes, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
   validates :progress, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true

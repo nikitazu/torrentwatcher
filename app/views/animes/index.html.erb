@@ -7,9 +7,15 @@
 <div>
   
   <ul class="list-group" style="display:inline-block;vertical-align:top">
+    <li class="list-group-item">
+      <%= link_to 'all', animes_path %>
+    </li>
+    <li class="list-group-item">
+      <%= link_to 'archived', animes_path(deleted: true) %>
+    </li>
   <% @tags.each do |tag| %>
     <li class="list-group-item">
-      <%= tag.name %>
+      <%= link_to tag.name, animes_path(tag_id: tag.id) %>
     </li>
   <% end %>
   </ul>

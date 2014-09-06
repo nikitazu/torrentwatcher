@@ -9,7 +9,12 @@ class AnimesController < ApplicationController
     if params[:deleted]
       @animes = current_user.animes.deleted
     else
-      @animes = current_user.animes.current
+      tag_id = params[:tag_id]
+      if tag_id
+        @animes = Tag.find(tag_id).animes
+      else
+        @animes = current_user.animes.current
+      end
     end
   end
 
