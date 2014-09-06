@@ -11,7 +11,7 @@ class AnimesController < ApplicationController
     else
       tag_id = params[:tag_id]
       if tag_id
-        @animes = Tag.find(tag_id).animes
+        @animes = current_user.animes.current.joins(:animes_tags).where("tags_animes.tag_id = ?", tag_id)
       else
         @animes = current_user.animes.current
       end
