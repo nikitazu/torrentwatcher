@@ -4,43 +4,55 @@
   <%= link_to 'New Anime', new_anime_path %>
 </div>
 
-<ul class="list-group">
-<% @animes.each do |anime| %>
-<li class="list-group-item">
-  <h4>
-    <%= link_to anime.title, "javascript:void();", onclick: "animesModule.expand(this);" %>
-    <small> - <%= anime.status %></small>
-  </h4>
+<div>
   
-  <div class="btn-toolbar-horizontal btn-group">
-    <%= small_button_to 'Up', up_anime_path(anime) %>
-    <%= small_button_to 'Edit', edit_anime_path(anime), method: "get" %>
-    <% unless anime.is_deleted %>
-      <%= small_button_to 'Archive', anime, method: "delete" %>
-    <% else %>
-      <%= small_button_to 'Restore', restore_anime_path(anime) %>
-    <% end %>
-    <div style="display:inline-block">
-      <%= form_for anime do |f| %>
-        <%= star_tag f %>
+  <ul class="list-group" style="display:inline-block;vertical-align:top">
+  <% @tags.each do |tag| %>
+    <li class="list-group-item">
+      <%= tag.name %>
+    </li>
+  <% end %>
+  </ul>
+
+  <ul class="list-group" style="display:inline-block;vertical-align:top">
+  <% @animes.each do |anime| %>
+  <li class="list-group-item">
+    <h4>
+      <%= link_to anime.title, "javascript:void();", onclick: "animesModule.expand(this);" %>
+      <small> - <%= anime.status %></small>
+    </h4>
+  
+    <div class="btn-toolbar-horizontal btn-group">
+      <%= small_button_to 'Up', up_anime_path(anime) %>
+      <%= small_button_to 'Edit', edit_anime_path(anime), method: "get" %>
+      <% unless anime.is_deleted %>
+        <%= small_button_to 'Archive', anime, method: "delete" %>
+      <% else %>
+        <%= small_button_to 'Restore', restore_anime_path(anime) %>
       <% end %>
+      <div style="display:inline-block">
+        <%= form_for anime do |f| %>
+          <%= star_tag f %>
+        <% end %>
+      </div>
     </div>
-  </div>
   
-  <div style="float:right">
-    <span class="badge" style="float:right">
-      <%= anime.progress %> / <%= anime.episodes %>
-    </span>
-    <div>
-      <%= anime.updated_at.strftime "%Y-%m-%d" %>
+    <div style="float:right">
+      <span class="badge" style="float:right">
+        <%= anime.progress %> / <%= anime.episodes %>
+      </span>
+      <div>
+        <%= anime.updated_at.strftime "%Y-%m-%d" %>
+      </div>
     </div>
-  </div>
-</li>
-<li class="list-group-item" style="display:none" data-url="<%= anime_path anime %>">
-  <!-- ajax generated -->
-</li>
-<% end %>
-</ul>
+  </li>
+  <li class="list-group-item" style="display:none" data-url="<%= anime_path anime %>">
+    <!-- ajax generated -->
+  </li>
+  <% end %>
+  </ul>
+
+</div>
 
 <div>
   <%= link_to 'New Anime', new_anime_path %>

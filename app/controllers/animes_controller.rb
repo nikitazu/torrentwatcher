@@ -5,6 +5,7 @@ class AnimesController < ApplicationController
   # GET /animes
   # GET /animes.json
   def index
+    @tags = Tag.all
     if params[:deleted]
       @animes = current_user.animes.deleted
     else
