@@ -49,10 +49,10 @@ class window.AnimesModule
 
   putMessage: (message, classes) ->
     @$alerts.empty().append $ "
-    <p class='#{classes} alert-info alert-dismissible' role='alert'>
+    <div class='#{classes} alert-info alert-dismissible' role='alert'>
      <button type='button' class='close' data-dismiss='alert'>
        <span aria-hidden='true'>&times;</span>
        <span class='sr-only'><%= t 'actions.dismiss' %></span>
      </button>
      #{message}
-    </p>"
+    </div>"

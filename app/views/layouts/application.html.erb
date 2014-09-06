@@ -9,20 +9,22 @@
 </head>
 <body>
   
-  <div id="authentication_form">
-    <% if user_signed_in? %>
-      <span>Здравствуйте, <%= current_user.email %></span> <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
-    <% else %>
-      <%= link_to 'Войти', new_user_session_path %> или 
-      <%= link_to 'Зарегистрироваться', new_user_registration_path %>
-    <% end %>
+  <div style="float:right">
+    <div id="alerts_container">
+      <%= render 'shared/alerts' %>
+    </div>
+    
+    <div id="authentication_form">
+      <% if user_signed_in? %>
+        <span>Здравствуйте, <%= current_user.email %></span> <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
+      <% else %>
+        <%= link_to 'Войти', new_user_session_path %> или 
+        <%= link_to 'Зарегистрироваться', new_user_registration_path %>
+      <% end %>
+    </div>
   </div>
   
   <h1><%= yield :page_header %></h1>
-  
-  <div id="alerts_container">
-    <%= render 'shared/alerts' %>
-  </div>
   
   <div id="content">
     <%= yield %>
